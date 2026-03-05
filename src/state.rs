@@ -1,6 +1,6 @@
 use std::{collections::BTreeMap, path::PathBuf};
 
-use iced::{Element, Task as Command, widget::{button, operation, text}};
+use iced::{Element, Task as Command, widget::{button, operation, row, text}};
 use serde::{Deserialize, Serialize};
 use time::Date;
 use uuid::Uuid;
@@ -19,8 +19,9 @@ pub enum HabitTracker {
 pub struct State {
     input_value: String,
     filter: Filter,
-    habits: Vec<Habit>,
-    logs: BTreeMap<Date, Vec<Uuid>>,
+    habits_mgr: HabitsManager,
+    // habits: Vec<Habit>,
+    // logs: BTreeMap<Date, Vec<Uuid>>,
     dirty: bool,
     saving: bool,
 }
@@ -29,10 +30,10 @@ pub enum Message {
     Loaded(Result<SavedState, LoadError>),
     Saved(Result<(), SaveError>),
     InputChanged(String),
-    CreateHabit,
+    // CreateHabit,
     FilterChanged(FilterState),
     TabPressed { shift: bool },
-    HabitMessage(Uuid, HabitMessage),
+    // HabitMessage(Uuid, HabitMessage),
 }
 
 impl HabitTracker {
@@ -236,4 +237,3 @@ impl From<&State> for SavedState {
         }
     }
 }
-

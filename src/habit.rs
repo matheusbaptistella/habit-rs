@@ -1,5 +1,8 @@
+use std::collections::BTreeMap;
+
 use iced::widget;
 use serde::{Deserialize, Serialize};
+use time::Date;
 use uuid::Uuid;
 
 #[derive(Clone, Debug, Deserialize, Serialize)]
@@ -61,4 +64,16 @@ impl Habit {
             HabitMessage::Delete => {}
         }
     }
+}
+
+
+pub struct HabitsManager {
+    habits: Vec<Habit>,
+    logs: BTreeMap<Date, Vec<Uuid>>,
+}
+
+pub enum HabitsManagerMessage {
+    CreateHabit,
+    ArchiveHabit,
+    DeleteHabit,
 }
